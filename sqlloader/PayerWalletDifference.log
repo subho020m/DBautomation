@@ -1,0 +1,16 @@
+
+SQL*Plus: Release 10.2.0.1.0 - Production on Wed Feb 17 17:22:30 2010
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Enter user-name: SP2-0306: Invalid option.
+Usage: CONN[ECT] [logon] [AS {SYSDBA|SYSOPER}]
+where <logon>  ::= <username>[/<password>][@<connect_identifier>] | /
+Enter user-name: SP2-0306: Invalid option.
+Usage: CONN[ECT] [logon] [AS {SYSDBA|SYSOPER}]
+where <logon>  ::= <username>[/<password>][@<connect_identifier>] | /
+SP2-0157: unable to CONNECT to ORACLE after 3 attempts, exiting SQL*Plus

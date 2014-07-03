@@ -1,0 +1,11 @@
+export PROCESS_SCHEMA_NAME=$FFA_SCHEMA
+export PROCESS_SCHEMA_PASS=$FFA_SCHEMA_PASS
+export PROCESS_SCHEMA_TABLESPACE=$FFA_SCHEMA_TABLESPACE
+$CRPSCRIPTS_DIR/commonscripts/createUser.sh
+
+export PROJECT_MASTER_DATA_DIR=$CRP_HOME/FFASchema/Source
+export PROJECT_REFERENCE_DATA_DIR=$CRP_HOME/FFASchema/Source
+export PROCESS_SCHEMA_DIR=$CRP_HOME/FFASchema/Source
+#$CRPSCRIPTS_DIR/commonscripts/prepareDBObjectscript.sh CreateTables CreateTriggerViews InsertReferenceData
+$CRPSCRIPTS_DIR/commonscripts/prepareDBObjectscript.sh CreateTypes CreateTables CreateTriggerViews InsertMasterData
+$CRPSCRIPTS_DIR/commonscripts/createDBobjects.sh

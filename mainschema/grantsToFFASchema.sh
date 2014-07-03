@@ -1,0 +1,29 @@
+sqlplus $1 <<EOF >> $CRPSCRIPTS_DIR/logs/mainschemaUserGrants.log
+DECLARE
+    l_owner_v     VARCHAR2(32):= '<<OWNER>>';
+    l_to_user_v   VARCHAR2(32):= '<<TARGET>>';
+BEGIN
+    FOR REC IN (SELECT 'GRANT SELECT ON '|| OBJECT_NAME || ' TO '||l_to_user_v L_COMMAND 
+                FROM ALL_OBJECTS 
+                WHERE OWNER=UPPER(l_owner_v) 
+                AND OBJECT_NAME IN ('CB_SERVICES','CB_SUB_SERVICES','CB_POS_SERVICES','CB_SERV_ORDER_STATUS','FXL_LOCATION_ZONES_VIEW','WF_CALENDAR','WF_SHIFT','WF_SPECIALDAY','FFA_LINESMAN_DETAILS','SEQ_SMS_MESSAGE_QUEUE'))
+    LOOP            
+        EXECUTE IMMEDIATE REC.L_COMMAND;
+    END LOOP;
+    FOR REC IN (SELECT 'GRANT SELECT,INSERT ON '|| OBJECT_NAME || ' TO '||l_to_user_v L_COMMAND 
+                FROM ALL_OBJECTS 
+                WHERE OWNER=UPPER(l_owner_v) 
+                AND OBJECT_NAME IN ('SMS_MESSAGE_QUEUE'))
+    LOOP            
+        EXECUTE IMMEDIATE REC.L_COMMAND;
+    END LOOP;
+    FOR REC IN (SELECT 'GRANT EXECUTE ON '|| OBJECT_NAME || ' TO '||l_to_user_v L_COMMAND 
+                FROM ALL_OBJECTS 
+                WHERE OWNER=UPPER(l_owner_v) 
+                AND OBJECT_NAME IN ('VALIDATE_USER_SESSION','ABILLITY_INTERFACE_API'))
+    LOOP            
+        EXECUTE IMMEDIATE REC.L_COMMAND;
+    END LOOP;
+END;
+/
+EOF

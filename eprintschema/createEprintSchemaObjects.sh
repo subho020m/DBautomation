@@ -1,0 +1,10 @@
+export PROCESS_SCHEMA_NAME=$EPRINT_SCHEMA
+export PROCESS_SCHEMA_PASS=$EPRINT_SCHEMA_PASS
+export PROCESS_SCHEMA_TABLESPACE=$EPRINT_SCHEMA_TABLESPACE
+$CRPSCRIPTS_DIR/commonscripts/createUser.sh
+
+export PROJECT_MASTER_DATA_DIR=$CRP_HOME/EprintSchema/Source
+export PROJECT_REFERENCE_DATA_DIR=$CRP_HOME/EprintSchema/Source
+export PROCESS_SCHEMA_DIR=$CRP_HOME/EprintSchema/Source
+$CRPSCRIPTS_DIR/commonscripts/prepareDBObjectscript.sh CreateTypes CreateTables CreateTriggerViews InsertMasterData
+$CRPSCRIPTS_DIR/commonscripts/createDBobjects.sh

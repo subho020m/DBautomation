@@ -1,0 +1,8 @@
+# PARAMETER FILE USED IN SQL LOADER
+
+userid = CONNECTION_STRING
+errors = 1
+rows   = 1000
+bindsize = 3000000
+readsize = 6000000
+skip = 1

@@ -1,0 +1,211 @@
+
+#Change the config file according to the required usage
+
+Integration()
+{
+
+ export MAIN_SCHEMA=${1}_PROD
+ export TYPE_SCHEMA=${1}_TYPES
+ export EPRINT_SCHEMA=${1}_EPRINT
+ export LOYALTY_SCHEMA=${1}_LOYALTY
+ export FFA_SCHEMA=${1}_FFA
+ export VIEW_SCHEMA=${1}_VIEW
+
+ #export MAIN_SCHEMA_PASS=PRODMTLINT
+ #export TYPE_SCHEMA_PASS=TYPESMTLINT
+ #export EPRINT_SCHEMA_PASS=EPRINTMTLINT
+ #export LOYALTY_SCHEMA_PASS=LOYALTYMTLINT
+ #export FFA_SCHEMA_PASS=FFAMTLINT
+ #export VIEW_SCHEMA_PASS=ABILLITY_INT_VIEW
+
+ export MAIN_SCHEMA_PASS=${1}_PROD
+ export TYPE_SCHEMA_PASS=${1}_TYPES
+ export EPRINT_SCHEMA_PASS=${1}_EPRINT
+ export LOYALTY_SCHEMA_PASS=${1}_LOYALTY
+ export FFA_SCHEMA_PASS=${1}_FFA
+ export VIEW_SCHEMA_PASS=${1}_VIEW
+
+ export CONNECT_STRING=$2
+
+ #Select 1 for running dbms jobs
+ export RUN_DBMS_JOBS=0
+
+ #Select 1 for creating partitions
+ export MAX_DATED_PARTITIONS=1
+
+ export MAIN_SCHEMA_TABLESPACE=ABILLITY_TBS
+ export MAIN_SCHEMA_CDR_TABLESPACE=ABILLITY_CDR_TBS
+ export TYPE_SCHEMA_TABLESPACE=ABILLITY_TBS
+ export EPRINT_SCHEMA_TABLESPACE=ABILLITY_TBS
+ export LOYALTY_SCHEMA_TABLESPACE=ABILLITY_TBS
+ export FFA_SCHEMA_TABLESPACE=ABILLITY_TBS
+ export VIEW_SCHEMA_TABLESPACE=ABILLITY_TBS
+}
+
+CompileObjects()
+{
+
+ export MAIN_SCHEMA=${1}_PROD
+ export TYPE_SCHEMA=${1}_TYPES
+ export EPRINT_SCHEMA=${1}_EPRINT 
+ export LOYALTY_SCHEMA=${1}_LOYALTY
+ export FFA_SCHEMA=${1}_FFA
+ export CONNECT_STRING=$2
+
+ #Select 1 for running dbms jobs
+ export RUN_DBMS_JOBS=0
+
+ #Select 1 for creating partitions
+ export MAX_DATED_PARTITIONS=1
+
+ export MAIN_SCHEMA_TABLESPACE=${1}_TBS
+ export TYPE_SCHEMA_TABLESPACE=${1}_TBS
+ export EPRINT_SCHEMA_TABLESPACE=${1}_TBS
+}
+
+GuiIntegration()
+{
+
+ echo "-GuiIntegration-"
+
+ export MAIN_SCHEMA=$1
+ export AUDIT_SCHEMA=${1}_audit
+ export CONNECT_STRING=$2
+
+ #Select 1 for running dbms jobs
+ export RUN_DBMS_JOBS=0
+
+ #Select 1 for creating partitions
+ export MAX_DATED_PARTITIONS=1
+
+ export MAIN_SCHEMA_TABLESPACE=$1
+ export AUDIT_SCHEMA_TABLESPACE=$1
+}
+
+
+FunctionalTesting()
+{
+ echo "FunctionalTesting"
+
+ export MAIN_SCHEMA=$1
+ export CONNECT_STRING=$2
+
+ #Select 1 for running dbms jobs
+ export RUN_DBMS_JOBS=0
+
+ #Select 1 for creating partitions
+ export MAX_DATED_PARTITIONS=1
+
+ export MAIN_SCHEMA_TABLESPACE=$1
+}
+
+
+GuiIntegrationMvno()
+{
+ echo "GuiIntegration_Mvno"
+
+ export MAIN_SCHEMA=$1
+ export APP_SCHEMA=${1}_app
+ export AUDIT_SCHEMA=${1}_audit
+ export CONNECT_STRING=$2
+
+ #Select 1 for running dbms jobs
+ export RUN_DBMS_JOBS=0
+
+ #Select 1 for creating partitions
+ export MAX_DATED_PARTITIONS=1
+
+ export MAIN_SCHEMA_TABLESPACE=$1
+ export APP_SCHEMA_TABLESPACE=$1
+ export AUDIT_SCHEMA_TABLESPACE=$1
+}
+
+
+FunctionalTestingMvno()
+{
+
+ echo "FunctionalTesting_Mvno"
+
+ export MAIN_SCHEMA=$1
+ export APP_SCHEMA=${1}_app
+ export CONNECT_STRING=$2
+
+ #Select 1 for running dbms jobs
+ export RUN_DBMS_JOBS=0
+
+ #Select 1 for creating partitions
+ export MAX_DATED_PARTITIONS=1
+
+ export MAIN_SCHEMA_TABLESPACE=$1
+ export APP_SCHEMA_TABLESPACE=$1
+}
+
+Production()
+{
+ echo "Production"
+
+ export MAIN_SCHEMA=$1
+ export AUDIT_SCHEMA=${1}_audit
+ export CONNECT_STRING=$2
+
+ #Select 1 for running dbms jobs
+ export RUN_DBMS_JOBS=1
+
+ #Select 1 for creating partitions
+ export MAX_DATED_PARTITIONS=0
+
+ export MAIN_SCHEMA_TABLESPACE=janus_prod
+ export AUDIT_SCHEMA_TABLESPACE=janus_prod
+ export PROD_TABLESPACE=janus_prod
+ export HIST_TABLESPACE=janus_prod
+ export CDR_BLOCKTABLESPACE=janus_prod
+ export CDR_KEYTABLESPACE=janus_prod
+}
+
+
+ProductionMvno()
+{
+ echo "Production_Mvno"
+
+ export MAIN_SCHEMA=$1
+ export APP_SCHEMA=${1}_app
+ export AUDIT_SCHEMA=${1}_audit
+ export CONNECT_STRING=$2
+
+ #Select 1 for running dbms jobs
+ export RUN_DBMS_JOBS=1
+
+ #Select 1 for creating partitions
+ export MAX_DATED_PARTITIONS=0
+
+ export MAIN_SCHEMA_TABLESPACE=janus_prod
+ export APP_SCHEMA_TABLESPACE=janus_prod
+ export AUDIT_SCHEMA_TABLESPACE=janus_prod
+ export PROD_TABLESPACE=janus_prod
+ export HIST_TABLESPACE=janus_prod
+ export CDR_BLOCKTABLESPACE=janus_prod
+ export CDR_KEYTABLESPACE=janus_prod
+}
+
+export SYS_USER=sys
+export SYS_PASS=sys
+
+#Select 1 for creating tablespaces.
+export CREATE_TABLESPACES=0
+#export DATA_FILE=/data/tablespaces/${1}_1.dbf
+
+#Following tablespace name configuration is valid only for options
+#other than Production and Production_Mvno
+export PROD_TABLESPACE=$1
+export HIST_TABLESPACE=$1
+export CDR_BLOCKTABLESPACE=$1
+export CDR_KEYTABLESPACE=$1
+
+if [ "$RELATIONSHIP" = "Integration" ]
+ then
+ Integration $1 $2
+fi
+if [ "$RELATIONSHIP" = "CompileObjects" ]
+ then
+ CompileObjects $1 $2
+fi
